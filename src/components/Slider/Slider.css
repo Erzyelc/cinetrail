@@ -1,0 +1,25 @@
+.slider-overlay{
+    background: linear-gradient(90deg, rgba(0.0.0.1) 0%, rgba(255,255,255,0) 100%);
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.slider-movie-info{
+    position: absolute;
+    bottom: 0;
+    color: var(--white);
+    width: 50%;
+}
+
+.left-arrow,
+.right-arrow{
+    position: absolute;
+    color: var(--red);
+    font-size: 50px;
+    top: 45%;
+}
+
+.right-arrow{
+    right: 0;
+}

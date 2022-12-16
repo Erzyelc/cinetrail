@@ -2,6 +2,7 @@ import React, {useContext} from 'react'
 import "./Header.css"
 import { MdOutlineLightMode, MdOutlineDarkMode } from "react-icons/md";
 import {ThemeContext} from "../../contexts/ThemeContext";
+import {Link} from "react-router-dom";
 
 function Header() {
 
@@ -19,7 +20,7 @@ function Header() {
 
   return (
     <div className={darkMode?"header-container":"header-container header-light"}>
-        <a href="/" className="logo">Cinetrail</a>
+        <a href="/"className="logo">Cinetrail</a>
         <input placeholder="Search Movies..." className="search-input" type="text" />
         <div className="header-buttons-container">
             {
