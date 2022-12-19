@@ -23,7 +23,7 @@ function Slider() {
         ()=>{
             axios.get(`${baseUrl}/movie/upcoming?api_key=${apiKey}`)
             .then(res=>{
-                console.log(res.data.results)
+                //console.log(res.data.results)
                 //store data in state
                 setUpcomingMovies(res.data.results)
             })
