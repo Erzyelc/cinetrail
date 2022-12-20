@@ -2,6 +2,8 @@ import React from 'react'
 import './Slider.css'
 import axios from 'axios'
 import {MdKeyboardArrowLeft, MdKeyboardArrowRight} from 'react-icons/md';
+import Rating from '../Rating/Rating';
+import Genres from '../Genres/Genres';
 
 function Slider() {
     //Slider needs api key, baseurl, imagebase
@@ -11,6 +13,7 @@ function Slider() {
 
     //create state for upcoming movies
     const [upcomingMovies, setUpcomingMovies] = React.useState([])
+    const [currentRating, setCurrentRating] = React.useState(0)
 
     //create state to keep track of index
     const [index, setIndex] = React.useState(0)
@@ -26,9 +29,10 @@ function Slider() {
                 //console.log(res.data.results)
                 //store data in state
                 setUpcomingMovies(res.data.results)
+                setCurrentRating(res.data.results[index]?.vote_average / 2)
             })
             .catch(err => console.log(err))
-        }, []
+        }, [index]
     )
 
     const sliderStyle={
@@ -65,7 +69,9 @@ function Slider() {
         <div className="slider-movie-info">
             <h1>{upcomingMovies[index]?.original_title}</h1>
             <p>{upcomingMovies[index]?.overview?.slice(0, 120)}</p>
+            <Genres movieGenres={upcomingMovies[index]?.genre_ids}/>
             <p>Release Date: {upcomingMovies[index]?.release_date}</p>
+            <Rating stars={currentRating}/>
             <p>See Details</p>
         </div>
     </div>

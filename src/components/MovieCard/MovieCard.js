@@ -1,4 +1,5 @@
 import React from 'react'
+import Rating from '../Rating/Rating';
 import './MovieCard.css'
 
 function MovieCard({movie, imageUrl, imgHeight, cardStyle}) {
@@ -24,11 +25,10 @@ function MovieCard({movie, imageUrl, imgHeight, cardStyle}) {
     <div className={cardStyle}>
         <div style={imageStyle}>
             <div className="movie-info-top">
-                <p>{movie.vote_average}</p>
+                <Rating stars={movie.vote_average /2}/>
             </div>
              <div className="movie-info-bottom">
                 <p>{movie.original_title}</p>
-                <p>Rating: {movie.vote_average}</p>
             </div>
         </div>
         {cardStyle==="top-rated-card"?

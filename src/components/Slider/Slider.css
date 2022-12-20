@@ -10,6 +10,7 @@
     bottom: 0;
     color: var(--white);
     width: 50%;
+    padding: 20px;
 }
 
 .left-arrow,

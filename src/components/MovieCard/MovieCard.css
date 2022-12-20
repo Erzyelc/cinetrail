@@ -21,4 +21,17 @@
 .popular-card:hover .movie-info-top,
 .popular-card:hover .movie-info-bottom{
     opacity: 1;
+    animation: myAnim 2s ease 0s 1 normal forwards;
+}
+
+@keyframes myAnim {
+    0% {
+        visibility: hidden;
+        transform: translateY(50px);
+    }
+
+    100% {
+        visibility: visible;
+        transform: translateY(0);
+    }
 }

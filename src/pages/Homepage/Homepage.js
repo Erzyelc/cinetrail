@@ -49,7 +49,7 @@ function Homepage() {
   )
   */
 
-  const {darkMode, setDarkMode} = useContext(ThemeContext);
+  const {darkMode, setDarkMode} = React.useContext(ThemeContext);
   return (
     <div className={darkMode?"homepage-container":"homepage-container homepage-light"}>
       <Slider />
