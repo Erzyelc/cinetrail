@@ -24,3 +24,13 @@
 .right-arrow{
     right: 0;
 }
+
+.movie-link{
+    color: var(--white);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.movie-link:hover{
+    color: var(--red);
+}

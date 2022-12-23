@@ -1,0 +1,46 @@
+.details-container{
+    margin-top:var(--header-height);
+    min-height: 100vh;
+    color:var(--white);
+    padding: 10px;
+}
+
+.trailer-container{
+    position: relative;
+    padding-top: 56.25%;
+}
+
+.trailer-player{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.trailer-container-blank{
+    position: relative;
+    padding-top: 56.25%;
+    color: var(--red);
+}
+
+.trailer-container-blank p{
+    background-color: var(--dark-bg);
+}
+
+.info-container{
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+}
+
+.details-poster{
+    width: 280px;
+    border-radius: 8px;
+    margin: 20px;
+}
+
+.movie-details-info{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
