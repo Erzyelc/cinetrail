@@ -5,6 +5,7 @@ import axios from 'axios'
 //import { MdArrowBackIos } from 'react-icons/md';
 import ReactPlayer from 'react-player'
 import Rating from '../../components/Rating/Rating';
+import Review from '../../components/Review/Review'
 
 
 function MovieDetails() {
@@ -17,6 +18,15 @@ function MovieDetails() {
     const [videoLink, setVideoLink] = React.useState('')
     //create state for movie info
     const [movie, setMovie] = React.useState('')
+    const [rating, setRating] = React.useState(0)
+
+    //create state for number of reviews displaying
+    const [reviewNumber, setReviewNumber] = React.useState(3)
+    const [totalReviews, setTotalReviews] = React.useState(0)
+    
+
+    //create state for movie reviews
+    const [reviews, setReviews] = React.useState([])
 
     //need to get param from url
     const {movieId} = useParams();
@@ -48,8 +58,18 @@ function MovieDetails() {
             .then(res=>{
                 //console.log(res.data)
                 setMovie(res.data)
+                setRating(res.data.vote_average / 2)
             })
       .catch(err=>console.log(err))
+
+      //get movie reviews
+            axios.get(`${baseUrl}/movie/${movieId}/reviews?api_key=${apiKey}`)
+            .then(res => {
+              //console.log(res.data.results)
+              setReviews(res.data.results)
+              setTotalReviews(res.data.total_results)
+            })
+            .catch(err => console.log(err))
         }, []
     )
 
@@ -78,7 +98,7 @@ function MovieDetails() {
       </div>
     }
     <h1>{movie?.original_title}</h1>
-    <Rating stars = {movie?.vote_average/2} />
+    <Rating stars = {rating} />
     <div className="info-container">
         <img src={`${imageBase}${movie?.poster_path}`} 
              className="details-poster" />
@@ -90,6 +110,20 @@ function MovieDetails() {
             <h4>Budget: <span>{movie?.budget}</span></h4>
         </div>
     </div>
+    <div className="review-container">
+    {
+      reviews.slice(0, reviewNumber).map(item => <Review review={item}/>)
+    }
+      {/*
+        reviews.map(item => <p>{item.author}</p>)
+      */}
+    </div>
+    {
+      reviewNumber <= totalReviews ? 
+      <p onClick={() => setReviewNumber(reviewNumber + 3)} className="more-reviews">Read more reviews</p>
+      :
+      <p onClick={() => setReviewNumber(3)} className="more-reviews">End of reviews</p>
+    }
     </div>
   )
 }
