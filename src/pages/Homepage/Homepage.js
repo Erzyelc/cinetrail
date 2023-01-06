@@ -63,6 +63,7 @@ function Homepage() {
               imageUrl ={item.poster_path}
               imgHeight = {"300px"}
               cardStyle = "popular-card"
+              bdrRadius = {"10px"}
             />)
           }
           {/*
@@ -88,6 +89,7 @@ function Homepage() {
               imageUrl={item.backdrop_path}
               imgHeight={"100px"}
               cardStyle = "top-rated-card"
+              bdrRadius = {"10px"}
             />)
           }
           </div>

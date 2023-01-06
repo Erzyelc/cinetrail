@@ -5,6 +5,8 @@ import Homepage from './pages/Homepage/Homepage';
 import Footer from './components/Footer/Footer';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import MovieDetails from './pages/MovieDetails/MovieDetails';
+import Signup from './Users/Signup';
+import Signin from './Users/Signin';
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Homepage />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/signin" element={<Signin />} />
           <Route path="/moviedetails/:movieId" element={<MovieDetails />} />
         </Routes>
         <Footer />

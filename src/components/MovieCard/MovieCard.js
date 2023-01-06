@@ -3,7 +3,7 @@ import Rating from '../Rating/Rating';
 import './MovieCard.css'
 import {Link} from 'react-router-dom';
 
-function MovieCard({movie, imageUrl, imgHeight, cardStyle}) {
+function MovieCard({movie, imageUrl, imgHeight, cardStyle, bdrRadius}) {
 
     const apiKey = process.env.REACT_APP_API_KEY;
     const baseUrl = process.env.REACT_APP_BASE_URL;
@@ -18,7 +18,8 @@ function MovieCard({movie, imageUrl, imgHeight, cardStyle}) {
         height: imgHeight,
         width: "200px",
         position: "relative",
-        margin: "10px"
+        margin: "10px",
+        borderRadius: bdrRadius
     }
 
 

@@ -2,10 +2,13 @@ import React, {useContext} from 'react'
 import "./Header.css"
 import { MdOutlineLightMode, MdOutlineDarkMode } from "react-icons/md";
 import {ThemeContext} from "../../contexts/ThemeContext";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 function Header() {
 
+    //activate navigate
+    let navigate = useNavigate();
+    //navigate('/signup')
     //const darkMode = true;
 
     //access the global state
@@ -41,7 +44,7 @@ function Header() {
                     />
                 </div>
             }
-            <button className="create-account-btn">Create an Account</button>
+            <button className="create-account-btn" onClick={() => navigate('/signup')}>Create an Account</button>
         </div>
     </div>
   )
