@@ -1,11 +1,11 @@
 import React from 'react'
-import './Sign.css'
+import "./Sign.css"
 import axios from 'axios'
 import {Link} from 'react-router-dom'
 
 function Signup() {
 
-    //create state tfor user info
+    //create state for user info
     const [email, setEmail] = React.useState('')
     const [password, setPassword] = React.useState('')
     const [username, setUsername] = React.useState('')
@@ -13,54 +13,59 @@ function Signup() {
 
     const serverUrl = "https://cinetrail-server.herokuapp.com";
 
+
     const handleSignup = (e) =>{
-        //have to prevent default on form
+        //have to prevent default on a form
         e.preventDefault();
-        console.log(email, password, username)
-        axios.post(`${serverUrl}/users/signup`, 
+        console.log ("signup")
+        console.log(email, password, username);
+        //console.log(`${serverUrl}/user/signup`)
+        //make api call to signup this user
+        axios.post(`${serverUrl}/users/signup`,
         {email, password, username})
-        .then( res => {
+        .then(res =>{
             console.log(res.data)
             //check for errors
-            if(res.data.status === 409){
+            if (res.data.status === 409){
                 alert("email already exists")
             }
             else{
                 //user was created
-                //clear textboxes
-                setEmail('')
-                setPassword('')
-                setUsername('')
+                //clear the textboxes
+                setEmail("")
+                setPassword("")
+                setUsername("")
                 setSuccess(true)
             }
         })
         .catch(err => console.log(err))
     }
 
+
   return (
     <div className="sign-container">
         <form className="signup-form" onSubmit={handleSignup}>
             <div className="title-container">
                 <h1>Sign Up</h1>
-                <p>Please fill in this form to create an account</p>
+                <p>Please fill in this form to create an account.</p>
             </div>
             <div className="input-wrapper">
                 <label htmlFor="email">Email</label>
-                <input type="email" placeholder="Enter email"
-                    onChange={(e) => setEmail(e.target.value)}
-                    value={email} id="email" required />
+                <input type="email" placeholder="Enter email" 
+                   onChange={(e)=>setEmail(e.target.value)}
+                    value={email}   id="email" required />
             </div>
             <div className="input-wrapper">
                 <label htmlFor="pwd">Password</label>
-                <input type="password" placeholder="Enter password"
-                    onChange={(e) => setPassword(e.target.value)}
-                    value={password} id="pwd" required />
+                <input type="password" placeholder="Enter password" 
+                onChange={(e)=>setPassword(e.target.value)}
+                 value={password}      id="pwd" required />
             </div>
             <div className="input-wrapper">
                 <label htmlFor="username">Username</label>
-                <input type="text" placeholder="Enter username"
-                    onChange={(e) => setUsername(e.target.value)}
-                    value={username} id="username" required />
+                <input type="text" placeholder="Enter username" 
+                onChange={(e)=>setUsername(e.target.value)}
+                value={username}       id="username" required />
             </div>
             <div className="button-container">
                 <button type="reset" className="cancel-btn">Cancel</button>
@@ -69,13 +74,14 @@ function Signup() {
             {
                 success?
                 <p>You are signed up successfully
-                    <Link to="/signin" className="red-text">
-                        Sign In
-                    </Link>
+                    <Link to="/signin" className="red-text">Signin</Link>
                 </p>
                 :
-                <p>Already have an account?</p>
+                <p>Already have an account?
+                    <Link to="/signin" className="red-text">Signin</Link>
+                </p>
             }
+
         </form>
     </div>
   )

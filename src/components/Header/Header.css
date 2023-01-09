@@ -67,3 +67,18 @@
     justify-content: space-between;
     border: solid 1px var(--grey);
 }
+
+.fav-div{
+    background-color: black;
+}
+
+.logout{
+    color: red;
+    cursor: pointer;
+}
+
+.profile-img{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+}

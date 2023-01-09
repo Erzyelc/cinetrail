@@ -1,16 +1,42 @@
 import React from 'react'
 import './Sign.css'
 import {Link} from 'react-router-dom'
+import axios from 'axios'
+import { UserContext } from '../../contexts/UserContext';
+import {useNavigate} from 'react-router-dom'
 
 function Signin() {
 
-    const [email, setEmail] = React.useState('')
-    const [password, setPassword] = React.useState('')
+    let navigate = useNavigate();
 
-    const handleSignin = () => {
-        
+    const serverUrl = "https://cinetrail-server.herokuapp.com";
+
+    //set up global state use CRULY BRACKETS here
+    const {user, setUser, token, setToken} = React.useContext(UserContext)
+
+    //create state for form inputs
+    const [email, setEmail] = React.useState("")
+    const[password, setPassword] = React.useState('')
+
+    const handleSignin = (e)=>{
+        e.preventDefault();
+        console.log(email, password)
+        //make api call to login
+        axios.post(`${serverUrl}/users/login`, {email, password})
+        .then(res=>{
+            console.log(res.data)
+            //save user data and token
+            setUser(res.data)
+            setToken(res.data.token)
+            //save values to local storage
+            localStorage.setItem('token', res.data.token)
+            localStorage.setItem('userInfo', JSON.stringify(res.data))
+        })
+        .catch(err => console.log(err))
+        //navigate to homepage
+        navigate('/')
+
     }
-
   return (
     <div className="sign-container">
         <form className="signup-form" onSubmit={handleSignin}>
