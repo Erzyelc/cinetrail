@@ -19,6 +19,7 @@
     color: var(--red);
     font-size: 50px;
     top: 45%;
+    cursor: pointer;
 }
 
 .right-arrow{

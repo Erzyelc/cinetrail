@@ -24,7 +24,7 @@ function MovieCard({movie, imageUrl, imgHeight, cardStyle, bdrRadius}) {
 
 
   return (
-    <Link to={`/moviedetails/${movie.id}`} className={cardStyle}>
+    <Link style={{ textDecoration: 'none', color: 'white' }} to={`/moviedetails/${movie.id}`} className={cardStyle}>
         <div style={imageStyle}>
             <div className="movie-info-top">
                 <Rating stars={movie.vote_average /2}/>
