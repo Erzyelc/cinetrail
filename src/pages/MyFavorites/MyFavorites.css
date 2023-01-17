@@ -1,0 +1,7 @@
+.favorites-container{
+    min-height: 100vh;
+    margin-top:var(--header-height);
+    color: var(--white);
+    display: flex;
+    flex-wrap: wrap;
+}

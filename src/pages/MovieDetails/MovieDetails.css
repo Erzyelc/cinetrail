@@ -44,3 +44,20 @@
     flex-direction: column;
     justify-content: space-between;
 }
+
+.btn-add, .btn-remove{
+    border-radius: 12px;
+    background-color: transparent;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.btn-remove{
+    border: solid 1px green;
+    color: green;
+}
+
+.btn-add{
+    border: 1px solid var(--red);
+    color: var(--red);
+}

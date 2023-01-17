@@ -5,10 +5,16 @@ import axios from 'axios'
 //import { MdArrowBackIos } from 'react-icons/md';
 import ReactPlayer from 'react-player'
 import Rating from '../../components/Rating/Rating';
-import Review from '../../components/Review/Review'
+import Review from '../../components/Review/Review';
+import { UserContext } from '../../contexts/UserContext';
 
 
 function MovieDetails() {
+
+    const serverUrl = "https://cinetrail-server.herokuapp.com";
+
+    const {user, setUser, token, setToken} = React.useContext(UserContext)
+
     const apiKey=process.env.REACT_APP_API_KEY;
     const baseUrl=process.env.REACT_APP_BASE_URL;
     const imageBase=process.env.REACT_APP_IMAGE_BASE;
@@ -28,11 +34,35 @@ function MovieDetails() {
     //create state for movie reviews
     const [reviews, setReviews] = React.useState([])
 
+    //create state to keep track of added or not to favorites
+    const [added, setAdded] = React.useState(false)
+
     //need to get param from url
     const {movieId} = useParams();
     console.log(movieId);
 
     //${baseUrl}/movie/${movieId}/videos?api_key=${apiKey}
+
+    React.useEffect(
+      ()=>{
+          //make request to see if this movie has been 
+          //added by this user
+          axios.post(`${serverUrl}/favoriteMovies/search`,
+          {
+              user_id: user?._id,
+              tmdb_id: movie?.id
+          })
+          .then(res =>{
+              console.log('search result')
+              console.log(res.data)
+              //change added if necessary
+              if (res.data){
+                  setAdded(true)
+              }
+          })
+
+      }, [user, movie]
+  )
 
     //call api to get video info when component loads
     React.useEffect(
@@ -70,8 +100,35 @@ function MovieDetails() {
               setTotalReviews(res.data.total_results)
             })
             .catch(err => console.log(err))
-        }, []
+        }, [user]
     )
+
+    const addToFavorites = () => {
+        //check if user is logged in
+        if (!token) {
+          alert('Please login to save favorites')
+        }else{
+          //make a request to save movie
+          axios.post(`${serverUrl}/favoriteMovies`, {
+            movie_id: movie.id,
+            user_id: user._id
+          })
+          .then(res => {
+            console.log(res.data)
+            setAdded(true)
+          })
+        }
+    }
+    
+    const removeFromFavorites = () => {
+        //make delete request
+        axios.delete(`${serverUrl}/favoriteMovies/${user._id}/${movie.id}`)
+        .then(res => {
+          console.log(res)
+          setAdded(false)
+        })
+        .catch(err => console.log(err))
+    }
 
 
   return (
@@ -98,6 +155,12 @@ function MovieDetails() {
       </div>
     }
     <h1>{movie?.original_title}</h1>
+    {
+      added?
+      <button className="btn-remove" onClick={removeFromFavorites}>Remove from favorites</button>
+      :
+      <button className="btn-add" onClick={addToFavorites}>Add to favorites</button>
+    }
     <Rating stars = {rating} />
     <div className="info-container">
         <img src={`${imageBase}${movie?.poster_path}`} 
